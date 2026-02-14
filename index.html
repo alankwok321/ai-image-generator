@@ -112,8 +112,13 @@
                     })
                 });
                 const data = await response.json();
+                if (data.error) {
+                    alert('Gemini 錯誤: ' + data.error.message);
+                    return null;
+                }
                 return data.candidates[0].content.parts[0].text;
             } catch (e) {
+                alert('網路請求失敗: ' + e.message);
                 console.error(e);
                 return null;
             }
