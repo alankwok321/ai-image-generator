@@ -139,16 +139,20 @@
         document.getElementById('ai-arrange').onclick = async () => {
             const btn = document.getElementById('ai-arrange');
             btn.innerText = "排序中...";
-            const prompt = `你是排程專家。請根據優先級和邏輯重新排序以下 JSON 任務清單，並返回排序後的 JSON 數據格式（不要說廢話）：${JSON.stringify(tasks)}`;
+            const prompt = `你是排程專家。請根據優先級和邏輯重新排序以下 JSON 任務清單，並僅返回排序後的 JSON 數據格式，不要包含任何 Markdown 標籤或解釋：${JSON.stringify(tasks)}`;
             const result = await callGemini(prompt);
             if (result) {
                 try {
-                    const jsonMatch = result.match(/\[.*\]/s);
+                    // 自動過濾 Markdown 標籤，例如 ```json ... ```
+                    let cleanResult = result.replace(/```json/g, "").replace(/```/g, "").trim();
+                    const jsonMatch = cleanResult.match(/\[.*\]/s);
                     if (jsonMatch) {
                         tasks = JSON.parse(jsonMatch[0]);
                         saveTasks();
                     }
-                } catch (e) { alert("AI 回傳格式錯誤"); }
+                } catch (e) { 
+                    alert("AI 回傳格式解析失敗，請再試一次。"); 
+                }
             }
             btn.innerHTML = '<i class="fas fa-wand-magic-sparkles mr-2"></i> AI 智能排序';
         };
