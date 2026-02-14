@@ -12,12 +12,26 @@
             50% { transform: scale(1.2); color: #fbbf24; }
             100% { transform: scale(1); }
         }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
         .level-up-anim { animation: levelUp 0.5s ease-out; }
         .progress-glow { box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+        .animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
     </style>
 </head>
 <body class="bg-slate-900 min-h-screen text-slate-100 p-4">
     <div class="max-w-md mx-auto">
+        <!-- 虛擬寵物區域 -->
+        <div class="flex flex-col items-center justify-center py-4 animate-bounce-slow">
+            <div id="pet-avatar" class="text-6xl mb-2">🦉</div>
+            <div id="pet-speech" class="bg-white text-slate-800 text-[10px] px-3 py-1 rounded-full relative shadow-sm">
+                主人，今天要一起變強嗎？
+                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-white rotate-45"></div>
+            </div>
+        </div>
+
         <!-- 玩家狀態欄 -->
         <div class="bg-slate-800 rounded-3xl p-6 mb-6 shadow-2xl border border-slate-700">
             <div class="flex items-center justify-between mb-4">
@@ -98,6 +112,20 @@
         }
 
         function updateUI() {
+            // 更新寵物狀態
+            const petAvatar = document.getElementById('pet-avatar');
+            const petSpeech = document.getElementById('pet-speech');
+            if (state.tasks.length > 5) {
+                petAvatar.innerText = "😨";
+                petSpeech.innerText = "主人...任務太多了，我好壓力...";
+            } else if (state.streak > 2) {
+                petAvatar.innerText = "🔥";
+                petSpeech.innerText = "我們現在強得不可思議！";
+            } else {
+                petAvatar.innerText = "🦉";
+                petSpeech.innerText = "主人，今天要一起變強嗎？";
+            }
+
             // 更新狀態欄
             document.getElementById('level-display').innerText = state.level;
             document.getElementById('coins-display').innerText = state.coins;
