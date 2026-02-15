@@ -1,0 +1,35 @@
+[
+    {
+        "id": "q1",
+        "topic": "Algebra - Linear Equations",
+        "question": "解方程式：2x + 5 = 15",
+        "options": ["x = 5", "x = 10", "x = 2", "x = 7.5"],
+        "answer": "x = 5",
+        "hint": "先把常數項 5 移到右邊。",
+        "explanation": "2x = 15 - 5 => 2x = 10 => x = 5",
+        "next_if_wrong": "q1_remedial",
+        "next_if_correct": "q2"
+    },
+    {
+        "id": "q1_remedial",
+        "topic": "Algebra - Basic Operations",
+        "question": "如果是 x + 5 = 15，x 等於多少？",
+        "options": ["x = 10", "x = 20", "x = 5", "x = 3"],
+        "answer": "x = 10",
+        "hint": "兩邊同時減去 5。",
+        "explanation": "x = 15 - 5 => x = 10",
+        "next_if_wrong": "q_fail",
+        "next_if_correct": "q1"
+    },
+    {
+        "id": "q2",
+        "topic": "Algebra - Quadratics",
+        "question": "因式分解：x² - 4",
+        "options": ["(x-2)(x+2)", "(x-2)²", "(x+2)²", "x(x-4)"],
+        "answer": "(x-2)(x+2)",
+        "hint": "這是平方差公式 a² - b² = (a-b)(a+b)。",
+        "explanation": "x² - 2² = (x-2)(x+2)",
+        "next_if_wrong": "q2_remedial",
+        "next_if_correct": "win"
+    }
+]
