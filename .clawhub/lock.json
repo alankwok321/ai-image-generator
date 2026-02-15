@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "skills": {
+    "duckduckgo-search": {
+      "version": "1.0.0",
+      "installedAt": 1771058075697
+    },
+    "browser-use": {
+      "version": "1.0.0",
+      "installedAt": 1771062146442
+    },
+    "crawl-for-ai": {
+      "version": "1.0.1",
+      "installedAt": 1771108470224
+    },
+    "playwright-scraper-skill": {
+      "version": "1.2.0",
+      "installedAt": 1771108480342
+    }
+  }
+}
